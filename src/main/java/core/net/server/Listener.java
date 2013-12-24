@@ -3,6 +3,8 @@ package core.net.server;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 
+import core.net.data.MessageQueue;
+
 public class Listener implements Runnable {
 
 	private MessageQueue messages;
@@ -26,8 +28,7 @@ public class Listener implements Runnable {
 				InetAddress packetAddress = packet.getAddress();
 				int packetPort = packet.getPort(); //might have to make sure the client uses same port as server.
 
-				messages.enqueue(new Message(received, packetAddress, packetPort));
-				System.out.println("Server received: " + "[msg=" + received+"]");
+				messages.enqueue(new Message(received, packetAddress, packetPort));				
 
 			} catch (Exception e) {
 				e.printStackTrace();

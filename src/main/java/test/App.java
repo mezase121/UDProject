@@ -13,12 +13,7 @@ import core.net.server.Server;
 public class App {
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
-		try {
 			Server server = new Server(27027);
-			server.start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		try {
 			Client client = new Client("24.232.106.85", 27027);

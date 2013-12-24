@@ -2,6 +2,8 @@ package core.net.client;
 
 import java.net.DatagramPacket;
 
+import core.net.data.MessageQueue;
+
 public class Listener implements Runnable {
 
 	private MessageQueue messages;
@@ -23,7 +25,7 @@ public class Listener implements Runnable {
 
 				received = new String(packet.getData(), 0, packet.getLength());
 				messages.enqueue(new Message(received));
-				System.out.println("Client received: " + "[msg=" + received + "]");
+				//System.out.println("Client received: " + "[msg=" + received + "]");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

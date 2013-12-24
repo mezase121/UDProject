@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import core.net.data.MessageQueue;
+
 public class Client {
 
 	public static InetAddress host;
 	public static int port;
 	public static DatagramSocket socket;
-	private boolean running = true;
 	
 	private MessageQueue messages = new MessageQueue();
 
@@ -18,9 +19,14 @@ public class Client {
 		this.port = port;
 		socket = new DatagramSocket();
 
-		int inc = 0;
-		String message = "Client";
-
+		Thread listenerThread = new Thread(new Listener(messages));
+		listenerThread.setDaemon(true);
+		listenerThread.start();
+		
+		Thread messageHandlerThread = new Thread(new MessageHandler(messages));
+		messageHandlerThread.setDaemon(true);
+		messageHandlerThread.start();
+		
 		new Thread(new Listener(messages)).start();
 		
 		while(true){

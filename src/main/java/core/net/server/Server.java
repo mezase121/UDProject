@@ -6,7 +6,9 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Server extends Thread {
+import core.net.data.MessageQueue;
+
+public class Server {
 
 	public static int port;
 	public static DatagramSocket socket;
@@ -18,9 +20,7 @@ public class Server extends Thread {
 	public Server(int port) throws IOException {
 		this.port = port;
 		socket = new DatagramSocket(port);
-	}
-
-	public void run() {
+		
 		System.out.println("Server running on port " + port + "...");
 
 		Thread listenerThread = new Thread(new Listener(messages));
@@ -30,6 +30,10 @@ public class Server extends Thread {
 		Thread messageHandlerThread = new Thread(new MessageHandler(messages, userPool));
 		messageHandlerThread.setDaemon(true);
 		messageHandlerThread.start();
+	}
+
+	public void run() {
+		
 
 		/*
 		 * while (running) { try { byte[] input = new byte[256];

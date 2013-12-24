@@ -14,5 +14,4 @@ public class Messenger {
 		DatagramPacket packet = new DatagramPacket(output, output.length, Client.host, Client.port);
 		Client.socket.send(packet);
 	}
-
 }
