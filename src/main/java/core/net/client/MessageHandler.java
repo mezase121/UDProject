@@ -15,7 +15,11 @@ public class MessageHandler implements Runnable {
 		while (true) {
 			try {
 				PlainMessage message = messages.dequeue();
-				new Thread(new MessageWorker(message)).start();
+				
+				System.out.println("Client received: "+message.toString());
+				
+				//do something with the received data
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
